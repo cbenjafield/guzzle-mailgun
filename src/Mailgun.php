@@ -48,8 +48,8 @@ class Mailgun
 	/**
 	 * Messages
 	 */
-	public function messages() : Api\Message
+	public function messages($domain = null) : Api\Message
 	{
-		return new Api\Message($this->client);
+		return new Api\Message($this->client, $domain);
 	}
 }

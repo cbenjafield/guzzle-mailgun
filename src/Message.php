@@ -5,6 +5,7 @@ namespace Cbenjafield\Mailgun;
 class Message
 {
 
+
 	/**
 	 * The from attribute.
 	 *
@@ -179,10 +180,10 @@ class Message
 	public function toArray()
 	{
 		return [
-			'to' => $this->stringOrArray($this->to),
+			'to' => $this->commaSeparated($this->to),
 			'from' => $this->from,
-			'bcc' => $this->stringOrArray($this->bcc),
-			'cc' => $this->stringOrArray($this->cc),
+			'bcc' => $this->commaSeparated($this->bcc),
+			'cc' => $this->commaSeparated($this->cc),
 			'subject' => $this->subject,
 			'text' => $this->text,
 			'html' => $this->html,
@@ -203,6 +204,21 @@ class Message
 			'form_params' => array_filter($this->toArray())
 		]);
 		return $response;
+	}
+
+	/**
+	 * Return a comma separated string of values.
+	 *
+	 * @param  mixed $value
+	 * @return string
+	 */
+	public function commaSeparated($value) : string
+	{
+		if(is_array($value)) {
+			return implode(',', $value);
+		}
+
+		return $value;
 	}
 
 }
