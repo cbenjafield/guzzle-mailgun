@@ -9,6 +9,11 @@
             "email": "me@cbenjafield.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Cbenjafield\\Mailgun\\": "src/"
+        }
+    },
     "minimum-stability": "dev",
     "require": {
         "guzzlehttp/guzzle": "^6.5"
