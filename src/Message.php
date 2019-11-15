@@ -77,6 +77,13 @@ class Message
 	protected $inline;
 
 	/**
+	 * Store the headers.
+	 *
+	 * @var array
+	 */
+	protected $headers = [];
+
+	/**
 	 * Set the from attribute.
 	 *
 	 * @param  string $address
@@ -173,13 +180,39 @@ class Message
 	}
 
 	/**
+	 * Add a header.
+	 *
+	 * @param  string $key
+	 * @param  mixed  $value
+	 * @return self
+	 */
+	public function addHeader(string $key, $value) : self
+	{
+		$this->headers['h:' . $key] = $value;
+
+		return $this;
+	}
+
+	/**
+	 * Add the reply to header.
+	 *
+	 * @param string $address
+	 * @return 
+	 */
+	public function setReplyTo(string $address) : self
+	{
+		$this->addHeader('Reply-To', $address);
+		return $this;
+	}
+
+	/**
 	 * Get the array representation.
 	 *
 	 * @return array
 	 */
 	public function toArray()
 	{
-		return [
+		return array_merge([
 			'to' => $this->commaSeparated($this->to),
 			'from' => $this->from,
 			'bcc' => $this->commaSeparated($this->bcc),
@@ -188,7 +221,7 @@ class Message
 			'text' => $this->text,
 			'html' => $this->html,
 			'ampHtml' => $this->ampHtml
-		];
+		], $this->headers);
 	}
 
 	/**
