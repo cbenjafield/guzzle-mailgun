@@ -39,7 +39,7 @@ class Message implements Apiable
 	/**
 	 * Set the Mailgun domain.
 	 */
-	public function setDomain(string $domain) : void
+	public function setDomain(string $domain) : self
 	{
 		if(is_null($domain)) throw new \InvalidArgumentException("Please specify a valid domain.");
 
