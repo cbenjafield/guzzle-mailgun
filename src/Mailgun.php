@@ -28,6 +28,13 @@ class Mailgun
 	private $version = 3;
 
 	/**
+	 * Specify the endpoint for the Mailgun API.
+	 *
+	 * @var string
+	 */
+	private $endpoint;
+
+	/**
 	 * The Mailgun constructor.
 	 *
 	 * @param  string  $apiKey
@@ -39,9 +46,15 @@ class Mailgun
 		if(is_null($endpoint)) throw new \InvalidArgumentException("Please specify a Mailgun API endpoint.");
 		if(is_null($timeout)) $timeout = 200;
 
+		$this->apiKey = $apiKey;
+		$this->endpoint = $endpoint;
+
 		$this->client = new Client([
 			'base_uri' => Url::make($this->endpoint, "v{$this->version}")->toString(),
-			'timeout' => $timeout
+			'timeout' => $timeout,
+			'auth' => [
+				'api', $apiKey
+			]
 		]);
 	}
 
