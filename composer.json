@@ -1,0 +1,16 @@
+{
+    "name": "cbenjafield/mailgun-guzzle",
+    "description": "Mailgun API interaction without messing about with PSR Discovery",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Charlie Benjafield",
+            "email": "me@cbenjafield.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "guzzlehttp/guzzle": "^6.5"
+    }
+}
